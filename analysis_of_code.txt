@@ -1,0 +1,60 @@
+
+1) Importing necessary libraries:
+
+openpiv: This is a library for performing Particle Image Velocimetry (PIV) analysis.
+os: Operating System specific module, used for interacting with the file system.
+numpy: Fundamental package for scientific computing with Python, used for numerical operations.
+matplotlib.pyplot: A plotting library for Python, used for visualization.
+glob: Module for Unix style pathname pattern expansion, used for finding files matching a specified pattern.
+imageio: Library for reading and writing a wide range of image data, used for image I/O operations.
+importlib_resources: Module for accessing resources inside packages, used for file path manipulation.
+pathlib: Module providing an object-oriented interface for working with file paths.
+
+2) Setting up file paths:
+
+importlib_resources.files('openpiv'): Retrieves the path to the 'openpiv' package.
+path / 'data/test2/': Appends the 'data/test2/' path to the obtained package path.
+os.chdir(path_fig): Changes the current working directory to the specified path.
+
+3) Reading files in the directory:
+
+os.listdir(): Lists all files and directories in the current working directory.
+List comprehension [f for f in os.listdir() if os.path.isfile(f)]: Filters out only the files from the list of directory contents.
+
+4) Getting the number of files:
+
+np.size(files): Returns the number of files in the list obtained in the previous step.
+
+5) Looping through image pairs and performing PIV analysis:
+
+Iterates through each file in the list of files.
+Reads consecutive image pairs (frame_a and frame_b) using tools.imread().
+
+6) Defining parameters for PIV analysis:
+
+winsize, searchsize, overlap, dt: Parameters required for PIV analysis, representing window size, search area size, overlap size, and time interval between frames, respectively.
+
+7) Performing PIV analysis:
+
+pyprocess.extended_search_area_piv(): Performs PIV analysis on the consecutive frames, returning velocity components (u0, v0) and signal-to-noise ratio (sig2noise).
+
+8) Post-processing:
+
+validation.sig2noise_val(): Generates an invalid mask based on the signal-to-noise ratio.
+filters.replace_outliers(): Filters out outliers in velocity components based on the invalid mask.
+9) Scaling and transforming coordinates:
+
+scaling.uniform(): Scales velocity and coordinate data using a scaling factor.
+tools.transform_coordinates(): Transforms the coordinates and velocity components.
+
+10) Saving results and displaying vector fields:
+
+tools.save(): Saves the processed data into a text file.
+tools.display_vector_field(): Visualizes the velocity vector field overlaid on an image.
+
+11) Exiting the script:
+
+exit(): Terminates the Python script execution.
+
+
+Each step of the code contributes to the process of reading images, analyzing them using PIV techniques, and visualizing the velocity fields.

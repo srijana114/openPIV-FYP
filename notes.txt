@@ -1,0 +1,11 @@
+There are two types of masking : 
+a) Static masking : The image with regions as white ( marked as 1 or True) should not be proecessed and the regions as black (marked as 0 or false) can be proecessed and there is no need of masking here
+b) Dynammic masking : The pair of frames are compared to find out the region that has to be masked. Then the average mask is applied to both frames for PIV analysis. 
+
+Why to use masking : 
+** masked regions are completely set to zero or completely black.
+** The zeros in the marked regions are never included for PIV analysis.
+??  in addition, the image mask is converted in a set of x,y coordinates on a PIV grid that mark the masked region in the vector field. These mask_coords are propagating through the window deformation and stored with the x,y,u,v,mask in the ASCII result files. The vector fields u,v are numpy.MaskedArray so the masked regions are invalid and should not appear in the plot. They could be also replaced by zeros or NaN if needed.
+
+IMP : *** Now, your task is basically to work on your set of images to find the velocity vector components (u and v) for each of the frame pairs and save the results in a text file. Write proper comments in your openpiv python code and also, in parallel, create the .docx file that will help you to work on your report ***
+
